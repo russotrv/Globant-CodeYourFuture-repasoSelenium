@@ -9,10 +9,9 @@ import utils.LocalDriver;
 public class TestLogin {
     private HomePage homePage;
 
-    private String userName;
-    private String password;
-    private String email;
-    private String lastname;
+    private static String userName, lastname, password, email;
+    private static String day, month, year;
+    private static String address, country, state, city, zipcode, mobile;
 
     @BeforeTest
     public void pretest() {
@@ -20,12 +19,26 @@ public class TestLogin {
         this.homePage = new HomePage(driver.getDriver());
     }
 
-    @Test
-    public void registerUser() {
+    @BeforeTest
+    public static void cargarDatosUsuario(){
         userName = "nombre";
-        password = "password"
+        password = "password";
         email = "nombre@gmail.com";
         lastname = "apellido";
+        day = "21";
+        month = "De";
+        year = "1989";
+        address = "direccion 111";
+        country = "new";
+        state = "provincia";
+        city = "ciudad";
+        zipcode = "codigo postal 1818";
+        mobile = "555-5554443";
+    }
+
+    @Test
+    public void registerUser() {
+        cargarDatosUsuario();
 
         this.homePage.homeVisible();
         LoginPage loginPage = this.homePage.clickSignUpLogin();
@@ -38,19 +51,19 @@ public class TestLogin {
         signUpPage.validateTitleAccount();
         signUpPage.selectGenderRadio();
         signUpPage.fillPassword(password);
-        signUpPage.fillDay("15");
-        signUpPage.fillMonth("De");
-        signUpPage.fillYear("1985");
+        signUpPage.fillDay(day);
+        signUpPage.fillMonth(month);
+        signUpPage.fillYear(year);
         signUpPage.clickNewsletter();
         signUpPage.clickOffer();
         signUpPage.fillName(userName);
         signUpPage.fillLastName(lastname);
-        signUpPage.fillAddress("direccion 111");
-        signUpPage.fillCountry("new");
-        signUpPage.fillState("provincia");
-        signUpPage.fillCity("ciudad");
-        signUpPage.fillZipCode("codigo postal 1818");
-        signUpPage.fillMobileNumber("555-5554443");
+        signUpPage.fillAddress(address);
+        signUpPage.fillCountry(country);
+        signUpPage.fillState(state);
+        signUpPage.fillCity(city);
+        signUpPage.fillZipCode(zipcode);
+        signUpPage.fillMobileNumber(mobile);
 
         AccountCreatedPage accountCreatedPage = signUpPage.clickCreateAccount();
         accountCreatedPage.validateTitleAccountCreated();
