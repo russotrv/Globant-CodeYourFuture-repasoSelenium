@@ -47,6 +47,20 @@ public class TestLogin {
         loginPage.fillInputEmail(email);
 
         SignUpPage signUpPage = loginPage.clickSignUpButton();
+        llenarFormularioRegistro(signUpPage);
+
+        AccountCreatedPage accountCreatedPage = signUpPage.clickCreateAccount();
+        accountCreatedPage.validateTitleAccountCreated();
+
+        LoggedHomePage loggedHomePage  = accountCreatedPage.clickContinueButton();
+        loggedHomePage.checkLogged(userName);
+        
+        AccountDeletedPage accountDeletedPage = loggedHomePage.deleteAccount();
+        accountDeletedPage.validateTitleAccountDeleted();
+        accountDeletedPage.clickContinueButton();
+    }
+
+    public static void llenarFormularioRegistro(SignUpPage signUpPage){
 
         signUpPage.validateTitleAccount();
         signUpPage.selectGenderRadio();
@@ -64,18 +78,7 @@ public class TestLogin {
         signUpPage.fillCity(city);
         signUpPage.fillZipCode(zipcode);
         signUpPage.fillMobileNumber(mobile);
-
-        AccountCreatedPage accountCreatedPage = signUpPage.clickCreateAccount();
-        accountCreatedPage.validateTitleAccountCreated();
-
-        LoggedHomePage loggedHomePage  = accountCreatedPage.clickContinueButton();
-
-        loggedHomePage.checkLogged(userName);
-        AccountDeletedPage accountDeletedPage = loggedHomePage.deleteAccount();
-        accountDeletedPage.validateTitleAccountDeleted();
-        accountDeletedPage.clickContinueButton();
     }
-
     @AfterTest
     public void postTest() {
 //        this.homePage.close();
