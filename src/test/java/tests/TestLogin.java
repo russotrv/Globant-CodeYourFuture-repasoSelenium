@@ -8,7 +8,11 @@ import utils.LocalDriver;
 
 public class TestLogin {
     private HomePage homePage;
+
     private String userName;
+    private String password;
+    private String email;
+    private String lastname;
 
     @BeforeTest
     public void pretest() {
@@ -19,24 +23,28 @@ public class TestLogin {
     @Test
     public void registerUser() {
         userName = "nombre";
+        password = "password"
+        email = "nombre@gmail.com";
+        lastname = "apellido";
+
         this.homePage.homeVisible();
         LoginPage loginPage = this.homePage.clickSignUpLogin();
         loginPage.visibleTitleSignUp();
         loginPage.fillInputName(userName);
-        loginPage.fillInputEmail("nombre@gmail.com");
+        loginPage.fillInputEmail(email);
 
         SignUpPage signUpPage = loginPage.clickSignUpButton();
 
         signUpPage.validateTitleAccount();
         signUpPage.selectGenderRadio();
-        signUpPage.fillPassword("password");
+        signUpPage.fillPassword(password);
         signUpPage.fillDay("15");
         signUpPage.fillMonth("De");
         signUpPage.fillYear("1985");
         signUpPage.clickNewsletter();
         signUpPage.clickOffer();
         signUpPage.fillName(userName);
-        signUpPage.fillLastName("apellido");
+        signUpPage.fillLastName(lastname);
         signUpPage.fillAddress("direccion 111");
         signUpPage.fillCountry("new");
         signUpPage.fillState("provincia");
